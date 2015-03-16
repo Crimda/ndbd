@@ -30,30 +30,45 @@ class Client(async.asyncore):
 			try: cmd = cmd.split()[0]
 			except: pass
 
-			print("DEBUG:\n\tcmd=%s\n\tpth=%s\n\tdat=%s\n"%(cmd, path, data))
+#			print("DEBUG:\n\tcmd=%s\n\tpth=%s\n\tdat=%s\n"%(cmd, path, data))
 
-			if cmd in ["s", "send", "put", "push", "p"]:
+			if cmd.lower() in ["s", "send", "put", "push", "p"]:
 				if data != "NONE" and path != "NONE":
 					self.post(path, data)
 				else:
 					print("Error: Missing parameters.\n\tUSAGE: [s,send,put,push,p] path message")
 
-			elif cmd in ["g", "get", "pull"]:
+			elif cmd.lower() in ["g", "get", "pull"]:
 				if path != "NONE":
 					self.get(path)
 				else:
 					print("Error: Missing parameters.\n\tUSAGE: [g,get,pull] path")
 
-			elif cmd in ["q", "sd", "shutdown", "quit", "k", "kill"]:
+			elif cmd.lower() in ["q", "sd", "shutdown", "quit", "k", "kill"]:
 				self.running = False
 				sock.close()
 				time.sleep(1)
 
-			elif cmd in ["ls"]:
+			elif cmd.lower() in ["ls"]:
 				if path != "NONE":
 					self.ls(path)
 				else:
 					print("Error: Missing parameters.\n\tUSAGE: [ls] path")
+
+			elif cmd.lower() in ["h", "?", "help",]:
+				print("NDB-BareBones v0.5")
+				print("==================")
+				print("s, send, put, push, p")
+				print("Will make a post to the server to a specific path $1, with content $2\n\tExample: s /p/myNewPost Hi all, this is my new post!")
+				print("g, get, pull")
+				print("Will get a post from the server at a specific path $1\n\tExample: g /tos")
+				print("ls")
+				print("Will aquire the contents of the directory $1\n\tExample: ls /")
+				print("q, sd, shutdown, quit, k, kill")
+				print("Will shut down the client")
+
+			else:
+				print("Invalid command %s, see help for a list of valid commands" %(cmd))
 
 		elif interface == sock:
 			data = sock.recv(512)

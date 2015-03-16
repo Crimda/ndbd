@@ -12,6 +12,8 @@ from utl import fileio
 log.LOGGER = "NDBD"
 log.FORMAT = init
 
+log.COLORBLIND = COLORBLIND
+
 if DEBUG:
 	log.out("Enabled StackTrace Debugging")
 	import traceback

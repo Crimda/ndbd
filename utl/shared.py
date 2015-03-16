@@ -8,10 +8,20 @@ good = "*W[*C*l*W] *G*m*0"
 conf = cfg.Cfg()
 conf.open("cfg/ndbd.cfg")
 
-DEBUG = conf.get("debug")
-DAT_DIR = conf.get("database")
 
+if conf.get("debug") == "true":
+	DEBUG = True
+else:
+	DEBUG = False
+
+DAT_DIR = conf.get("database")
 HOST = conf.get("host")
+
+if conf.get("colors") == "false":
+	COLORBLIND = True
+	print("Colors Disabled")
+else:
+	COLORBLIND = False
 
 try:
 	PORT = int(conf.get("port"))

@@ -1,11 +1,31 @@
 NoteDB System
 =============
 
-#!!!Warning!!!#
-##This package depends on [wst](git://wazu.info.tm/wst.git)##
+##Dependancies##
+[Wazu Python Standard Library](git://wazu.info.tm/wst.git)
 
-This contains of two seperate programs, the client sample and the actual
-server notedbd.py.
+##Intro##
+I wrote this tool basically to act as a sort of custom
+mail-list/forums/email/note tracker/etc.
+I was planning on using it to help me keep notes, and
+more importantly, actually keep track of reasons _Why_
+I change things, sort of simulating how I talk to myself
+rather than acting as a cold flat database. In essence,
+I am going to be talking to myself and debating with
+myself with this tool.
 
-Config files will be found in /etc/
+This contains two seperate programs:
+*	Extremely bare-bones client: *bbclient*
+* The actual server: *ndbd*
 
+There is a basic example configuration in */cfg*, and
+some documentation, probably more like notes really, in
+*docs*.
+
+##Installation##
+See `make` for instructions here.
+
+##Basic use##
+Start the server.
+Connect clients.
+Do work billy.

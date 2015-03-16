@@ -19,7 +19,7 @@ HOST = conf.get("host")
 
 if conf.get("colors") == "false":
 	COLORBLIND = True
-	print("Colors Disabled")
+	print("NDBD:Colors Disabled")
 else:
 	COLORBLIND = False
 

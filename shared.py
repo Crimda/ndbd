@@ -1,0 +1,5 @@
+init = "*W*l:*m*0"
+norm = "*W[*C*l*W] *m*0"
+erro = "*W[*C*l*W] *R*m*0"
+warn = "*W[*C*l*W] *Y*m*0"
+good = "*W[*C*l*W] *G*m*0"

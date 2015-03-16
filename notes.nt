@@ -1,0 +1,41 @@
+Notedb manuscript/notes
+so, we basically need a simple system for doing msg boards and what not.
+
+how does a message board, or even a forum work?
+
+Well, it takes a single document, and appends the post stuff to said document.
+To create a new post, simply create a new document.
+
+To create a new branch, simply create a new folder.
+
+For security purposes, best to limit directory depth, perhaps to 10.
+
+We could simply append posts to the file,
+
+For example:
+   Wazubaba - 07 Mar, Sat 02:54:30
+   This is a sample note. It will act as an example, and will
+   consist of two lines and 93 chars.
+
+   ==========================================================
+   User2 - 07 Mar, Sat 02:57:00
+   This is a response to that post, which essentially contributes
+   absolutely nothing to the conversation, but acts as a rather
+   useful example text body.
+
+   ==========================================================
+   Wazubaba - 07 Mar, Sat 02:58:09
+   Ohai, I see that! ^^
+
+
+Basically, every new post, append a newline followed by 58 ‘=’s
+for legibility
+
+
+
+There will be a simple web server system in place to send the posts as html,
+for convieniance. This will be read-only however.
+
+It will be a function which ‘render()’’s the post file into a valid html sheet.
+
+

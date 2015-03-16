@@ -1,0 +1,87 @@
+body {
+	background-color: black;
+	color: #439BAD;
+}
+
+P {
+	color: #439BAD;
+}
+
+h1 {
+	color: #6C34C9;
+}
+
+h2 {
+	color: #6C34C9;
+}
+
+h3 {
+	color: #6C34C9;
+}
+
+h4 {
+	color: #6C34C9;
+}
+
+h5 {
+	color: #6C34C9;
+}
+
+h6 {
+	color: #6C34C9;
+}
+
+a:link {
+	color: #7136D1;
+	text-decoration: none;
+	border: 1px solid #48179B;
+}
+
+a:visited {
+	color: #5430BA;
+	text-decoration: none;
+}
+
+a:hover {
+	color: #9273C6;
+	text-decoration: none;
+}
+
+a#noborder:link {
+	color: #439BAD;
+	text-decoration: none;
+}
+
+a#noborder:visited {
+	color: #439BAD:
+	text-decoration: none;
+}
+
+a#noborder:hover {
+	color: #439BAD;
+	text-decoration: none;
+}
+
+table#main {
+	align: left;
+	position: relative;
+	left: 5%;
+	border: 1px solid #48179B;
+}
+
+table#element {
+	align: center;
+	width: 100%;
+	border: 1px solid #48179B;
+}
+
+td#name {
+	text-align: center;
+	border: 1px solid #48179B;
+	width: 25%;
+}
+
+td#desc {
+	border: 1px solid #48179B;
+	width: 75%;
+}

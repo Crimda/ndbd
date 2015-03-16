@@ -1,9 +1,11 @@
 import os
 from wst.trm import log
 from shared import *
+from vfs import *
 #EXC = []
 DB = "db/"
 ERR = "|ERR|"
+vfs = VFS(DAT_DIR)
 
 log.LOGGER = "NDBd->fileio"
 
@@ -42,19 +44,18 @@ def security(func):
 			return func(path)
 	return wrap
 
+
 @security
-def ls(path=DB):
+def ls(path):
 	"""
 		Synopsis: Return list of files and directories
 		Takes: string path to directory
-		Returns: tuple of two lists, one directories, one files,
-		or -1 if odd attempt. False if path does not exist
+		Returns: tuple of two lists, one directories, one files
+		or False if path does not exist
 	"""
-	if path == ERR: return -1
-#	if path[len(path)-1] != '/': path += '/' # This is the only function that will always take a dir path
 	retval = ([],[])
 	try:
-		for entry in os.listdir(path):
+		for entry in vfs.listdir(path):
 			if os.path.isdir(path+entry):
 				retval[0].append(entry)
 			else:
@@ -69,12 +70,11 @@ def get(path):
 	"""
 		Synopsis: Return content of a specific file
 		Takes: string path to file
-		Returns: string data of file or bool False if
-		file does not exist, -1 if odd attempt
+		Returns: string data of file or False if
+		file does not exist
 	"""
-	if path == ERR: return -1
 	try:
-		fp = open(path, "r")
+		fp = vfs.open(path, "r")
 		fdat = fp.read()
 		fp.close()
 		return fdat
@@ -86,16 +86,11 @@ def set(path, data):
 	"""
 		Synopsis: Either create or append data to a file
 		Takes: string path to file, string data to append
-		Returns: bool success, or -1 if odd attempt
+		Returns: bool success
 	"""
-	if path == ERR: return -1
-
-#	log.FORMAT = norm
-#	log.out("%s\n^->%s" %(path, data))
-#	log.FORMAT = init
 	try:
-		fp = open(path, "a")
-		fp.write(data)
+		fp = vfs.open(path, "a")
+		fp.write(data+"\n")
 		fp.close()
 		return True
 	except IOError:

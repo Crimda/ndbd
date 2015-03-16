@@ -1,6 +1,5 @@
 from wst.trm import log
 from wst.utl import async
-from wst.fio import cfg
 
 import socket
 import os
@@ -10,26 +9,8 @@ import time
 from shared import *
 import fileio
 
-log.LOGGER = "NDBd"
-
+log.LOGGER = "NDBD"
 log.FORMAT = init
-
-conf = cfg.Cfg()
-conf.open("cfg/ndbd.cfg")
-
-DEBUG = conf.get("debug")
-DAT_DIR = conf.get("database")
-
-HOST = conf.get("host")
-
-try:
-	PORT = int(conf.get("port"))
-except:
-	log.FORMAT = "*R*l:*m*0"
-	log.out("Unable to read port from config, defaulting to 65535")
-	PORT = 65535
-
-MAX_CLIENTS = conf.get("maxClients")
 
 if DEBUG:
 	log.out("Enabled StackTrace Debugging")

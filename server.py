@@ -1,5 +1,6 @@
 from wst.trm import log
 from wst.utl import async
+from wst.fio import cfg
 
 import socket
 import os
@@ -13,10 +14,25 @@ log.LOGGER = "NDBd"
 
 log.FORMAT = init
 
-DEBUG = True
-DAT_DIR = "./db"
+conf = cfg.Cfg()
+conf.open("cfg/ndbd.cfg")
+
+DEBUG = conf.get("debug")
+DAT_DIR = conf.get("database")
+
+HOST = conf.get("host")
+
+try:
+	PORT = int(conf.get("port"))
+except:
+	log.FORMAT = "*R*l:*m*0"
+	log.out("Unable to read port from config, defaulting to 65535")
+	PORT = 65535
+
+MAX_CLIENTS = conf.get("maxClients")
 
 if DEBUG:
+	log.out("Enabled StackTrace Debugging")
 	import traceback
 
 class Server(async.asyncore):
@@ -197,12 +213,12 @@ server = Server({
 })
 
 server.acceptClients = True
-server.maxClients    = 25
+server.maxClients    = MAX_CLIENTS
 
 log.out("Binding socket...")
 
 try:
-	sock.bind(("localhost", 65535))
+	sock.bind((HOST, PORT))
 	sock.listen(5)
 except socket.error as e:
 	log.FORMAT = erro

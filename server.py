@@ -70,8 +70,10 @@ class Server(async.asyncore):
 			else:
 				self.serve(path, client)
 		elif cmd == "put":
-			if path == None or data == None:
-				self.invalidReq(client)
+			if path == None:
+				self.invalidReq(client, "Missing path!")
+			elif data == None:
+				self.invalidReq(client, "Missing data!")
 			else:
 				self.take(path, data, client) # Include client for post IP logging
 		elif cmd == "ls":
@@ -80,7 +82,7 @@ class Server(async.asyncore):
 			else:
 				self.listDirs(path, client)
 		else:
-			self.invalidReq(client)
+			self.invalidReq(client, "Unknown data")
 
 	def listDirs(self, path, client):
 		log.FORMAT = norm
@@ -128,7 +130,13 @@ class Server(async.asyncore):
 		elif data == True:
 			client.send("Post successful\n")
 
-	def invalidReq(self, client):
+	def invalidReq(self, client, reason=""):
+		ip, port = client.getsockname()
+		log.FORMAT = warn
+		if reason != "":
+			log.out("Invalid request from %s:%s: %s" %(ip, port, reason))
+		else:
+			log.out("Invalid request from %s:%s" %(ip, port))
 		self.say(client, "ERR Invalid Req\n")
 		client.close()
 		self.monitors["readers"].remove(client)

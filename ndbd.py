@@ -6,8 +6,8 @@ import os
 import sys
 import time
 
-from shared import *
-import fileio
+from utl.shared import *
+from utl import fileio
 
 log.LOGGER = "NDBD"
 log.FORMAT = init
